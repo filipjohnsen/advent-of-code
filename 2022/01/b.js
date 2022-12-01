@@ -7,10 +7,8 @@ const elves = file.split('\n');
 let mostCaloriesConsumed = [0, 0, 0];
 let currentCalories = 0;
 
-for (let index = 0; index < elves.length; index++) {
-  const element = elves[index];
-
-  if (element == '') {
+elves.forEach((elf) => {
+  if (elf == '') {
     const index = mostCaloriesConsumed.findIndex(
       (item) => item < currentCalories && item === Math.min(...mostCaloriesConsumed)
     );
@@ -20,11 +18,11 @@ for (let index = 0; index < elves.length; index++) {
     }
 
     currentCalories = 0;
-    continue;
+    return;
   }
 
-  currentCalories += parseInt(element);
-}
+  currentCalories += parseInt(elf);
+});
 
 const result = mostCaloriesConsumed.reduce((acc, curr) => acc + curr, 0);
 

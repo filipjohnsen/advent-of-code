@@ -7,19 +7,17 @@ const elves = file.split('\n');
 let mostCaloriesConsumed = 0;
 let currentCalories = 0;
 
-for (let index = 0; index < elves.length; index++) {
-  const element = elves[index];
-
-  if (element == '') {
+elves.forEach((elf) => {
+  if (elf == '') {
     if (currentCalories > mostCaloriesConsumed) {
       mostCaloriesConsumed = currentCalories;
     }
 
     currentCalories = 0;
-    continue;
+    return;
   }
 
-  currentCalories += parseInt(element);
-}
+  currentCalories += parseInt(elf);
+});
 
 console.log(mostCaloriesConsumed);
