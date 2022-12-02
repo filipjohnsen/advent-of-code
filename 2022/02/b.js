@@ -6,19 +6,7 @@ const rounds = file.split('\n');
 
 const plays = ['A', 'B', 'C'];
 
-const losePlay = {
-  A: 'C',
-  B: 'A',
-  C: 'B',
-};
-
-const winPlay = {
-  A: 'B',
-  B: 'C',
-  C: 'A',
-};
-
-const calculateWinScore = (play) => {
+const calculateScore = (play) => {
   const score = plays.indexOf(play) + 1;
 
   return score;
@@ -27,21 +15,25 @@ const calculateWinScore = (play) => {
 const result = rounds.reduce((acc, curr) => {
   const [opponent, me] = curr.split(' ');
 
+  const index = plays.indexOf(opponent);
+
+  // draw
   if (me === 'Y') {
-    return acc + calculateWinScore(opponent) + 3;
+    const play = opponent;
+    return acc + calculateScore(play) + 3;
   }
 
+  // loose
   if (me === 'X') {
-    const play = losePlay[opponent];
-    return acc + calculateWinScore(play) + 0;
+    const play = plays[index - 1] ?? plays[plays.length - 1];
+
+    return acc + calculateScore(play) + 0;
   }
 
-  if (me === 'Z') {
-    const play = winPlay[opponent];
-    return acc + calculateWinScore(play) + 6;
-  }
+  // win
+  const play = plays[index + 1] ?? plays[0];
 
-  return acc;
+  return acc + calculateScore(play) + 6;
 }, 0);
 
 console.log(result);
