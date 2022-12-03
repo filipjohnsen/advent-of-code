@@ -1,3 +1,4 @@
+console.time('time');
 import fs from 'fs';
 
 const file = fs.readFileSync('./input.txt', 'utf8');
@@ -12,28 +13,30 @@ const calculateScore = (play) => {
   return score;
 };
 
-const result = rounds.reduce((acc, curr) => {
-  const [opponent, me] = curr.split(' ');
-
-  const index = plays.indexOf(opponent);
-
-  // draw
-  if (me === 'Y') {
-    const play = opponent;
-    return acc + calculateScore(play) + 3;
-  }
+const result = rounds.reduce((total, currentRound) => {
+  const [opponent, me] = currentRound.split(' ');
 
   // loose
   if (me === 'X') {
+    const index = plays.indexOf(opponent);
     const play = plays[index - 1] ?? plays[plays.length - 1];
 
-    return acc + calculateScore(play) + 0;
+    return total + calculateScore(play) + 0;
   }
 
   // win
-  const play = plays[index + 1] ?? plays[0];
+  if (me === 'Z') {
+    const index = plays.indexOf(opponent);
+    const play = plays[index + 1] ?? plays[0];
 
-  return acc + calculateScore(play) + 6;
+    return total + calculateScore(play) + 6;
+  }
+
+  // draw
+  const play = opponent;
+
+  return total + calculateScore(play) + 3;
 }, 0);
 
 console.log(result);
+console.timeEnd('time');
