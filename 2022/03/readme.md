@@ -10,10 +10,10 @@ The list of items for each rucksack is given as characters all on a single line.
 
 For example, suppose you have the following list of contents from six rucksacks:
 
-```js
-vJrwpWtwJgWrhcsFMMfFFhFp;
-jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL;
-PmmdzqPrVvPwwTWBwg;
+```text
+vJrwpWtwJgWrhcsFMMfFFhFp
+jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+PmmdzqPrVvPwwTWBwg
 ```
 
 ```js
