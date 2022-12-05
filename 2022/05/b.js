@@ -8,11 +8,14 @@ const moves = file.split('\n');
 moves.forEach((move) => {
   const [, qty, , from, , to] = move.split(' ');
 
-  const originCrates = crates[parseInt(from) - 1];
+  const indexFrom = parseInt(from) - 1;
+  const indexTo = parseInt(to) - 1;
+
+  const originCrates = crates[indexFrom];
 
   const moveCrates = originCrates.splice(originCrates.length - qty, qty);
 
-  crates[parseInt(to) - 1].push(...moveCrates);
+  crates[indexTo].push(...moveCrates);
 });
 
 const resultString = crates.reduce((acc, curr) => acc + curr[curr.length - 1], '');
