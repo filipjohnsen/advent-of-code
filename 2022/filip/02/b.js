@@ -1,4 +1,3 @@
-console.time('time');
 import fs from 'fs';
 
 const file = fs.readFileSync('./input.txt', 'utf8');
@@ -39,4 +38,3 @@ const result = rounds.reduce((total, currentRound) => {
 }, 0);
 
 console.log(result);
-console.timeEnd('time');
