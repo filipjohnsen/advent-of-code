@@ -5,15 +5,14 @@ const file = fs.readFileSync('./input.txt', 'utf8');
 
 const rucksacks = file.split('\n');
 
-const result = rucksacks.reduce((acc, curr) => {
+const result = rucksacks.reduce((acc, items) => {
   const numberOfItems = curr.length / 2;
-  const items = curr;
   const right = items.slice(0, numberOfItems).split('');
   const left = items.slice(numberOfItems).split('');
 
-  const duplicateItems = new Set(...right.filter((item) => left.includes(item)));
+  const removeDuplicateItems = new Set(...right.filter((item) => left.includes(item)));
 
-  const sum = [...duplicateItems].reduce((acc, curr) => {
+  const sum = [...removeDuplicateItems].reduce((acc, curr) => {
     return acc + alphabet.indexOf(curr) + 1;
   }, 0);
 
