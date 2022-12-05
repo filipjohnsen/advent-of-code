@@ -1,35 +1,20 @@
 import fs from 'fs';
+import crates from './crates.js';
 
 const file = fs.readFileSync('./input.txt', 'utf8');
-
-const crates = [
-  ['G', 'J', 'W', 'R', 'F', 'T', 'Z'],
-  ['M', 'W', 'G'],
-  ['G', 'H', 'N', 'J'],
-  ['W', 'N', 'C', 'R', 'J'],
-  ['M', 'V', 'Q', 'G', 'B', 'S', 'F', 'W'],
-  ['C', 'W', 'V', 'D', 'T', 'R', 'S'],
-  ['V', 'G', 'Z', 'D', 'C', 'N', 'B', 'H'],
-  ['C', 'G', 'M', 'N', 'J', 'S'],
-  ['L', 'D', 'J', 'C', 'W', 'N', 'P', 'G'],
-];
-
-const cratesReverse = crates.map((crate) => crate.reverse());
 
 const moves = file.split('\n');
 
 moves.forEach((move) => {
-  const [m, number, f, origin, t, destination] = move.split(' ');
+  const [, number, , from, , to] = move.split(' ');
 
-  const originCrates = cratesReverse[parseInt(origin) - 1];
+  const originCrates = crates[parseInt(from) - 1];
 
   const moveCrates = originCrates.splice(originCrates.length - number, number);
 
-  cratesReverse[parseInt(destination) - 1].push(...moveCrates.reverse());
+  crates[parseInt(to) - 1].push(...moveCrates.reverse());
 });
 
-const resultString = cratesReverse.reduce((acc, curr) => {
-  return acc + curr[curr.length - 1];
-}, '');
+const resultString = crates.reduce((acc, curr) => acc + curr[curr.length - 1], '');
 
 console.log(resultString);
