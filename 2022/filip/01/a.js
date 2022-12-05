@@ -2,22 +2,10 @@ import fs from 'fs';
 
 const file = fs.readFileSync('./input.txt', 'utf8');
 
-const elves = file.split('\n');
+const result = Math.max(
+  ...file
+    .split('\n\n')
+    .map((group) => group.split('\n').reduce((acc, curr) => acc + parseInt(curr), 0))
+);
 
-let mostCaloriesConsumed = 0;
-let currentCalories = 0;
-
-elves.forEach((elf) => {
-  if (elf == '') {
-    if (currentCalories > mostCaloriesConsumed) {
-      mostCaloriesConsumed = currentCalories;
-    }
-
-    currentCalories = 0;
-    return;
-  }
-
-  currentCalories += parseInt(elf);
-});
-
-console.log(mostCaloriesConsumed);
+console.log(result);
