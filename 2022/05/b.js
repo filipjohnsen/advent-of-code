@@ -6,11 +6,11 @@ const file = fs.readFileSync('./input.txt', 'utf8');
 const moves = file.split('\n');
 
 moves.forEach((move) => {
-  const [, number, , from, , to] = move.split(' ');
+  const [, qty, , from, , to] = move.split(' ');
 
   const originCrates = crates[parseInt(from) - 1];
 
-  const moveCrates = originCrates.splice(originCrates.length - number, number);
+  const moveCrates = originCrates.splice(originCrates.length - qty, qty);
 
   crates[parseInt(to) - 1].push(...moveCrates);
 });
