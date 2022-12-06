@@ -4,7 +4,7 @@ const file = fs.readFileSync('./input.txt', 'utf8');
 
 const pairs = file.split('\n');
 
-const overlappingPairs = pairs.filter((pair) => {
+const result = pairs.filter((pair) => {
   const [a, b] = pair.split(',');
 
   const aMin = parseInt(a.split('-')[0]);
@@ -15,6 +15,6 @@ const overlappingPairs = pairs.filter((pair) => {
   if ((aMin >= bMin && aMin <= bMax) || (bMin >= aMin && bMin <= aMax)) {
     return pair;
   }
-});
+}).length;
 
-console.log(overlappingPairs.length);
+console.log(result);
